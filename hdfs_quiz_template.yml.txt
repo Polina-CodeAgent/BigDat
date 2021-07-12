@@ -1,73 +1,71 @@
 beginner.how_many_items_in_hdfs:
-    stdin: "provide your answer here"
+    stdin: "9"
 intermediate.hdfs_list_recursively:
-    stdin: "provide your answer here"
+    stdin: "hdfs dfs -ls -R /data/wiki"
 intermediate.hdfs_list_recursively_human_readable:
-    stdin: "provide your answer here"
+    stdin: "hdfs dfs -ls -R -h /data/wiki"
 intermediate.hdfs_file_replication_factor:
-    stdin: "provide your answer here"
+    stdin: "3"
 intermediate.hdfs_folder_replication_factor:
-    stdin: "provide your answer here"
+    stdin: "0"
 intermediate.hdfs_describe_size:
-    stdin: "provide your answer here"
+    stdin: "actual"
 intermediate.hdfs_cumulative_size:
-    stdin: "provide your answer here"
+    stdin: "hdfs dfs -du -s -h /data/wiki"
 intermediate.hdfs_create_folder:
-    stdin: "provide your answer here"
+    stdin: "hdfs dfs -mkdir /user/acn2021q3_podgorbunsky/15intermex"
 intermediate.hdfs_create_nested_folder:
-    stdin: "provide your answer here"
+    stdin: "hdfs dfs -mkdir -p /user/acn2021q3_podgorbunsky/15intermex/1subfold/2subfold"
 intermediate.hdfs_remove_nested_folders:
-    stdin: "provide your answer here"
+    stdin: "hdfs dfs -rm -R /user/acn2021q3_podgorbunsky/15intermex"
 intermediate.hdfs_trash_behavior:
-    stdin: "provide your answer here"
+    stdin: |-
+        Trash (корзина) помогает предотвратить случайное удаление файлов и каталогов. При удалении файла файл не удаляется сразу из FS
+        hdfs dfs -rm -R -skipTrash /user/acn2021q3_podgorbunsky/15intermex
 intermediate.hdfs_create_empty_file:
-    stdin: "provide your answer here"
+    stdin: "hdfs dfs -touchz /user/acn2021q3_podgorbunsky/15newfile"
 intermediate.hdfs_create_small_file:
-    stdin: |-
-        provide your
-        multiline answer
-        here
+    stdin: "hdfs dfs -put sometext.txt /user/acn2021q3_podgorbunsky"
 intermediate.hdfs_output_file:
-    stdin: "provide your answer here"
+    stdin: "hdfs dfs -cat /user/acn2021q3_podgorbunsky/sometext.txt"
 intermediate.hdfs_output_file_end:
-    stdin: "provide your answer here"
+    stdin: "hdfs dfs -tail /user/acn2021q3_podgorbunsky/sometext.txt"
 intermediate.hdfs_output_file_start:
-    stdin: "provide your answer here"
+    stdin: "hdfs dfs -cat /user/acn2021q3_podgorbunsky/sometext.txt | head"
 intermediate.hdfs_tail_vs_unix_tail:
-    stdin: "provide your answer here"
+    stdin: "tail -c 1024 sometext.txt"
 intermediate.hdfs_copy_file:
-    stdin: "provide your answer here"
+    stdin: "hdfs dfs -cp /user/acn2021q3_podgorbunsky/sometext.txt /user/acn2021q3_podgorbunsky/sometext_copy.txt"
 intermediate.hdfs_move_file:
-    stdin: |-
-        provide your
-        multiline answer
-        here
+    stdin: "hdfs dfs -mv /user/acn2021q3_podgorbunsky/sometext_copy.txt /user/acn2021q3_podgorbunsky/ForCopyDir"
 intermediate.hdfs_download_and_concatenate:
-    stdin: "provide your answer here"
+    stdin: "hdfs dfs -getmerge /user/acn2021q3_podgorbunsky/ForCopyDir/sometext_copy.txt /user/acn2021q3_podgorbunsky/sometext.txt /user/acn2021q3_podgorbunsky/15newfile output.txt"
 advanced.hdfs_set_file_replication:
     stdin: |-
-        provide your
-        multiline answer
-        here
+        hdfs dfs -setrep -w 4 /user/acn2021q3_podgorbunsky/sometext.txt
+        около 7 секунд заняло увелечение количества реплик
 advanced.hdfs_get_files_and_block:
-    stdin: "provide your answer here"
+    stdin: "hdfs fsck /user/acn2021q3_podgorbunsky/sometext.txt -files -blocks -locations"
 advanced.hdfs_get_block_information:
-    stdin: "provide your answer here"
+    stdin: "hdfs fsck -blockId blk_1089178765"
 advanced.hdfs_dfs_architecture:
     stdin: |-
-        provide your
-        multiline answer
-        here
+        hdfs fsck /user/acn2021q3_podgorbunsky/sometext.txt -files -blocks
+        sudo -i -u hdfuser
+        ssh brain-node3.bigdatateam.org
+        cd /home/disk1
+        find -name blk_1089178765
+        cd hadoop/datanode/current/BP-981064612-78.46.171.101-1581506447497/current/finalized/subdir11/subdir12
+        cat blk_1089178765
+        hdfs dfs -ls /data/namenode_example
+        hdfs dfs -ls /data/namenode_example/current
 advanced.webhdfs_read_100B:
-    stdin: |-
-        provide your
-        multiline answer
-        here
+    stdin: "curl -i -L "http://brain-master/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=OPEN&length=100""
 advanced.webhdfs_curl_follow_redirects:
-    stdin: "provide your answer here"
+    stdin: "curl -i -L "http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=OPEN""
 advanced.webhdfs_get_file_detailed_information:
-    stdin: "provide your answer here"
+    stdin: "curl -i "http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=GETFILESTATUS""
 advanced.webhdfs_change_file_replication:
-    stdin: "provide your answer here"
+    stdin: "curl -i -X PUT "http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?user.name=acn2021q3_podgorbunsky&op=SETREPLICATION&replication=2""
 advanced.webhdfs_append_to_file:
-    stdin: "provide your answer here"
+    stdin: "curl -i -X POST "http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=APPEND""
