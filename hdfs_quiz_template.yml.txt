@@ -60,12 +60,12 @@ advanced.hdfs_dfs_architecture:
         hdfs dfs -ls /data/namenode_example
         hdfs dfs -ls /data/namenode_example/current
 advanced.webhdfs_read_100B:
-    stdin: "curl -i -L "http://brain-master/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=OPEN&length=100""
+    stdin: "curl -i -L \"http://brain-master/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=OPEN&length=100\""
 advanced.webhdfs_curl_follow_redirects:
-    stdin: "curl -i -L "http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=OPEN""
+    stdin: "curl -i -L \"http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=OPEN\""
 advanced.webhdfs_get_file_detailed_information:
-    stdin: "curl -i "http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=GETFILESTATUS""
+    stdin: "curl -i \"http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=GETFILESTATUS\""
 advanced.webhdfs_change_file_replication:
-    stdin: "curl -i -X PUT "http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?user.name=acn2021q3_podgorbunsky&op=SETREPLICATION&replication=2""
+    stdin: "curl -i -X PUT \"http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?user.name=acn2021q3_podgorbunsky&op=SETREPLICATION&replication=2\""
 advanced.webhdfs_append_to_file:
-    stdin: "curl -i -X POST "http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=APPEND""
+    stdin: "curl -i -X POST \"http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=APPEND\""
