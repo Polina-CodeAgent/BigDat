@@ -1,0 +1,53 @@
+advanced.hdfs_dfs_architecture:
+  stdin: [hdfs fsck /user/acn2021q3_podgorbunsky/sometext.txt -files -blocks, sudo
+      -i -u hdfuser, ssh brain-node3.bigdatateam.org, cd /home/disk1, find -name blk_1089178765,
+    cd hadoop/datanode/current/BP-981064612-78.46.171.101-1581506447497/current/finalized/subdir11/subdir12,
+    cat blk_1089178765, hdfs dfs -ls /data/namenode_example, hdfs dfs -ls /data/namenode_example/current]
+advanced.hdfs_get_block_information: {stdin: hdfs fsck -blockId blk_1089178765}
+advanced.hdfs_get_files_and_block: {stdin: hdfs fsck /user/acn2021q3_podgorbunsky/sometext.txt
+    -files -blocks -locations}
+advanced.hdfs_set_file_replication:
+  stdin: [hdfs dfs -setrep -w 4 /user/acn2021q3_podgorbunsky/sometext.txt, "\u043E\u043A\
+      \u043E\u043B\u043E 7 \u0441\u0435\u043A\u0443\u043D\u0434 \u0437\u0430\u043D\
+      \u044F\u043B\u043E \u0443\u0432\u0435\u043B\u0435\u0447\u0435\u043D\u0438\u0435\
+      \ \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u0430 \u0440\u0435\u043F\
+      \u043B\u0438\u043A"]
+advanced.webhdfs_append_to_file: {stdin: 'curl -i -X POST "http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=APPEND"'}
+advanced.webhdfs_change_file_replication: {stdin: 'curl -i -X PUT "http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?user.name=acn2021q3_podgorbunsky&op=SETREPLICATION&replication=2"'}
+advanced.webhdfs_curl_follow_redirects: {stdin: 'curl -i -L "http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=OPEN"'}
+advanced.webhdfs_get_file_detailed_information: {stdin: 'curl -i "http://brain-master:50070/webhdfs/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=GETFILESTATUS"'}
+advanced.webhdfs_read_100B: {stdin: 'curl -i -L "http://brain-master/v1/user/acn2021q3_podgorbunsky/sometext.txt?op=OPEN&length=100"'}
+beginner.how_many_items_in_hdfs: {stdin: '9'}
+intermediate.hdfs_copy_file: {stdin: hdfs dfs -cp /user/acn2021q3_podgorbunsky/sometext.txt
+    /user/acn2021q3_podgorbunsky/sometext_copy.txt}
+intermediate.hdfs_create_empty_file: {stdin: hdfs dfs -touchz /user/acn2021q3_podgorbunsky/15newfile}
+intermediate.hdfs_create_folder: {stdin: hdfs dfs -mkdir /user/acn2021q3_podgorbunsky/15intermex}
+intermediate.hdfs_create_nested_folder: {stdin: hdfs dfs -mkdir -p /user/acn2021q3_podgorbunsky/15intermex/1subfold/2subfold}
+intermediate.hdfs_create_small_file: {stdin: hdfs dfs -put sometext.txt /user/acn2021q3_podgorbunsky}
+intermediate.hdfs_cumulative_size: {stdin: hdfs dfs -du -s -h /data/wiki}
+intermediate.hdfs_describe_size: {stdin: actual}
+intermediate.hdfs_download_and_concatenate: {stdin: hdfs dfs -getmerge /user/acn2021q3_podgorbunsky/ForCopyDir/sometext_copy.txt
+    /user/acn2021q3_podgorbunsky/sometext.txt /user/acn2021q3_podgorbunsky/15newfile
+    output.txt}
+intermediate.hdfs_file_replication_factor: {stdin: '3'}
+intermediate.hdfs_folder_replication_factor: {stdin: '0'}
+intermediate.hdfs_list_recursively: {stdin: hdfs dfs -ls -R /data/wiki}
+intermediate.hdfs_list_recursively_human_readable: {stdin: hdfs dfs -ls -R -h /data/wiki}
+intermediate.hdfs_move_file: {stdin: hdfs dfs -mv /user/acn2021q3_podgorbunsky/sometext_copy.txt
+    /user/acn2021q3_podgorbunsky/ForCopyDir}
+intermediate.hdfs_output_file: {stdin: hdfs dfs -cat /user/acn2021q3_podgorbunsky/sometext.txt}
+intermediate.hdfs_output_file_end: {stdin: hdfs dfs -tail /user/acn2021q3_podgorbunsky/sometext.txt}
+intermediate.hdfs_output_file_start: {stdin: hdfs dfs -cat /user/acn2021q3_podgorbunsky/sometext.txt
+    | head}
+intermediate.hdfs_remove_nested_folders: {stdin: hdfs dfs -rm -R /user/acn2021q3_podgorbunsky/15intermex}
+intermediate.hdfs_tail_vs_unix_tail: {stdin: tail -c 1024 sometext.txt}
+intermediate.hdfs_trash_behavior:
+  stdin: ["Trash (\u043A\u043E\u0440\u0437\u0438\u043D\u0430) \u043F\u043E\u043C\u043E\
+      \u0433\u0430\u0435\u0442 \u043F\u0440\u0435\u0434\u043E\u0442\u0432\u0440\u0430\
+      \u0442\u0438\u0442\u044C \u0441\u043B\u0443\u0447\u0430\u0439\u043D\u043E\u0435\
+      \ \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u0435 \u0444\u0430\u0439\u043B\u043E\
+      \u0432 \u0438 \u043A\u0430\u0442\u0430\u043B\u043E\u0433\u043E\u0432. \u041F\
+      \u0440\u0438 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u0438 \u0444\u0430\u0439\
+      \u043B\u0430 \u0444\u0430\u0439\u043B \u043D\u0435 \u0443\u0434\u0430\u043B\u044F\
+      \u0435\u0442\u0441\u044F \u0441\u0440\u0430\u0437\u0443 \u0438\u0437 FS", hdfs
+      dfs -rm -R -skipTrash /user/acn2021q3_podgorbunsky/15intermex]
